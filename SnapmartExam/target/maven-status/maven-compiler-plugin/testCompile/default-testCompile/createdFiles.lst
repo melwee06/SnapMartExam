@@ -1,0 +1,6 @@
+snapmartexam\test\AccessLoginTest.class
+snapmartexam\test\AccessLandingPageTest.class
+snapmartexam\test\LoginWithIncorrectCredentialsTest.class
+snapmartexam\test\AddToBasketTest.class
+snapmartexam\test\CuongnguyenTest.class
+snapmartexam\test\LoginWithCorrectCredentialsTest.class
