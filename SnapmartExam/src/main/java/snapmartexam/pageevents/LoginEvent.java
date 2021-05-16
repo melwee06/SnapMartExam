@@ -1,7 +1,5 @@
 package snapmartexam.pageevents;
 
-import java.io.IOException;
-
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import snapmartexam.utils.ExplicitWait;
@@ -55,16 +53,16 @@ public class LoginEvent {
 	public boolean loginInorrectCredentials(WebDriver driver, ExtentReporter reporter) {
 		element.getWebElement(driver, "ID", "email").sendKeys(username);
 		element.getWebElement(driver, "ID", "password").sendKeys(password);
-		reporter.logExtentReport(driver, "screenShot", "loginInorrectCredentials", "");
+		reporter.logExtentReport(driver, "screenShot", "loginInorrectCredentialsTest", "");
 		element.getWebElement(driver, "ID", "loginButton").click();
 		//validate if still on login page
 		boolean validateFailedLogin = validatePage.validatePage(driver, "XPATH", "//div[contains(@class, 'error ng-star-inserted')]", 5, expUrlLogin, 5);
 		if(validateFailedLogin) {
 			reporter.logExtentReport(driver, "pass", "", "Error message displayed, stayed on Login page.");
-			reporter.logExtentReport(driver, "screenShot", "loginInorrectCredentialsClicked", "");
+			reporter.logExtentReport(driver, "screenShot", "loginInorrectCredentialsClickedTest", "");
 		}else {
 			reporter.logExtentReport(driver, "fail", "", "Error message was not displayed.");
-			reporter.logExtentReport(driver, "screenShotFail", "loginInorrectCredentialsFail", "");
+			reporter.logExtentReport(driver, "screenShotFail", "loginInorrectCredentialsTestFail", "");
 		}
 		Assert.assertEquals("Should still be in Login Page after error", true, validateFailedLogin);
 		return validateFailedLogin;

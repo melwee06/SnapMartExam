@@ -3,8 +3,6 @@ package snapmartexam.pageevents;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.io.IOException;
-
 import org.junit.Assert;
 import snapmartexam.utils.ExplicitWait;
 import snapmartexam.utils.ExtentReporter;

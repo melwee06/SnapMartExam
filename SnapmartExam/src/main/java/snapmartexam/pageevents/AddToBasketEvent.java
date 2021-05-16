@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import snapmartexam.utils.ExplicitWait;
+import snapmartexam.utils.ExtentReporter;
 import snapmartexam.utils.FetchElement;
 import snapmartexam.utils.ValidatePage;
 
@@ -22,7 +23,7 @@ public class AddToBasketEvent {
 	private static String expUrlBasket;
 	private static int successAdded=0, count;
 		
-	public boolean addItemsToBasketThroughPagination(WebDriver driver) {
+	public boolean addItemsToBasketThroughPagination(WebDriver driver, ExtentReporter reporter) {
 		boolean addItemCheckP = false;
 		//get initial value of order count
 		count = Integer.parseInt(element.getWebElement(driver, "XPATH", "//span[contains(@class,'warn-notification')]").getText());
@@ -63,12 +64,18 @@ public class AddToBasketEvent {
 				}
 			}while(!itemVisible);
 			
-			addItemCheckP = addNumberofItems(driver, orders.getKey(), orders.getValue());
+			addItemCheckP = addNumberofItems(driver, orders.getKey(), orders.getValue(), reporter);
+		}
+		if(addItemCheckP) {
+			reporter.logExtentReport(driver, "pass", "", "Item count was updated.");
+		}else {
+			reporter.logExtentReport(driver, "fail", "", "Item count was not updated properly.");
+			reporter.logExtentReport(driver, "screenShotFail", "addNumberofItemsTestFail", "");
 		}
 		return addItemCheckP;
 	}
 	
-	public boolean addItemsToBasketThroughSearch(WebDriver driver) {
+	public boolean addItemsToBasketThroughSearch(WebDriver driver, ExtentReporter reporter) {
 		boolean addItemCheckS = false;
 		element.getWebElement(driver, "XPATH", "//mat-icon[contains(.,'search')]").click();
 		addedItemsMap = new LinkedHashMap<>();
@@ -86,20 +93,30 @@ public class AddToBasketEvent {
 			//check item if searchable
 			boolean notFound = element.getWebElements(driver, "XPATH", "//mat-card/img[contains(@alt,'No results found')]").size()!=0;
 			if(!notFound) {
-				addItemCheckS = addNumberofItems(driver, orders.getKey(), orders.getValue());
+				addItemCheckS = addNumberofItems(driver, orders.getKey(), orders.getValue(), reporter);
 			}
+		}
+		if(addItemCheckS) {
+			reporter.logExtentReport(driver, "pass", "", "Item count was updated.");
+		}else {
+			reporter.logExtentReport(driver, "fail", "", "Item count was not updated properly.");
+			reporter.logExtentReport(driver, "screenShotFail", "addNumberofItemsTestFail", "");
 		}
 		return addItemCheckS;
 	}
 	
-	public boolean addNumberofItems(WebDriver driver, String key, int value) {
+	public boolean addNumberofItems(WebDriver driver, String key, int value, ExtentReporter reporter) {
 		boolean countUpdated = true;
+		boolean confirm = false;
+		boolean error = false;
 		//number of clicks referencing order count from orders value
 		for(int i=0; i<value; i++) {
 			//click order referencing order name from orders key
 			element.getWebElement(driver, "XPATH", "//div[contains(@class, 'item-name') and contains(text(),'"+key+"')]/../../following-sibling::div/button").click();
 			
-			if(element.getWebElements(driver, "XPATH", "//snack-bar-container[contains(@class,'confirmBar')]").size()!=0) {
+			confirm = element.getWebElements(driver, "XPATH", "//snack-bar-container[contains(@class,'confirmBar')]").size()!=0;
+			error = element.getWebElements(driver, "XPATH", "//snack-bar-container[contains(@class,'errorBar')]").size()!=0;
+			if(confirm) {
 				final WebElement notifElement = element.getWebElement(driver, "XPATH", "//span[contains(@class,'warn-notification')]");
 				//wait for ajax to kick in
 				new WebDriverWait(driver, 5).until(new ExpectedCondition<Boolean>() {
@@ -116,17 +133,24 @@ public class AddToBasketEvent {
 				count=newCount;
 				successAdded++;
 			}
-			
 		}
 		//populate map of success addition
 		if(successAdded>0) {
 			addedItemsMap.put(key, successAdded);
 			successAdded=0;
 		}
+
+		if(confirm) {
+			reporter.logExtentReport(driver, "screenShot", key + "addAvailableItem", "");
+		}
+		if(error) {
+			//also get screenshot of added unavailable items
+			reporter.logExtentReport(driver, "screenShot", "addUnavailableItem", "");
+		}
 		return countUpdated;
 	}
 	
-	public boolean checkAddedItems(WebDriver driver) {
+	public boolean checkAddedItems(WebDriver driver, ExtentReporter reporter) {
 		boolean basketCheck = false;
 		element.getWebElement(driver, "XPATH", "(//span[contains(.,'Your Basket')])[2]").click();
 		//validate if redirected to purchase basket page
@@ -147,9 +171,15 @@ public class AddToBasketEvent {
 				Assert.assertEquals("Count was updated on basket page", true, countUpdated);
 			}else {
 				basketCheck = false;
+				reporter.logExtentReport(driver, "fail", "", "Items were not added to the basket or count was wrong.");
+				reporter.logExtentReport(driver, "screenShotFail", "checkAddedItemsTestFail", "");
 				Assert.assertEquals("Available item is not displayed on the basket", true, basketCheck);
 			}
 			
+		}
+		if(basketCheck) {
+			reporter.logExtentReport(driver, "pass", "", "Items were successfully added to the basket.");
+			reporter.logExtentReport(driver, "screenShot", "checkAddedItemsTest", "");
 		}
 		return basketCheck;
 	}
