@@ -14,7 +14,7 @@ public class LoginEvent {
 	ExplicitWait waitElement = new ExplicitWait();
 	ValidatePage validatePage = new ValidatePage();
 		
-	public boolean accessLogin(WebDriver driver, ExtentReporter reporter) {
+	public void accessLogin(WebDriver driver, ExtentReporter reporter) {
 		element.getWebElement(driver, "XPATH", "(//span[contains(.,'Account')])[2]").click();
 		element.getWebElement(driver, "XPATH", "(//span[contains(.,'Login')])[2]").click();
 		
@@ -28,10 +28,9 @@ public class LoginEvent {
 			reporter.logExtentReport(driver, "screenShotFail", "loginPageTestFail", "");
 		}
 		Assert.assertEquals("Login page was not loaded properly", true, validateLoginPage);
-		return validateLoginPage;
 	}
 	
-	public boolean loginCorrectCredentials(WebDriver driver, ExtentReporter reporter) {
+	public void loginCorrectCredentials(WebDriver driver, ExtentReporter reporter) {
 		element.getWebElement(driver, "ID", "email").sendKeys(username);
 		element.getWebElement(driver, "ID", "password").sendKeys(password);
 		reporter.logExtentReport(driver, "screenShot", "loginCorrectCredentialsTest", "");
@@ -47,10 +46,9 @@ public class LoginEvent {
 			reporter.logExtentReport(driver, "screenShotFail", "loginCorrectCredentialsTest", "");
 		}
 		Assert.assertEquals("Search page was not loaded properly", true, validateRedirectToSearch);
-		return validateRedirectToSearch;
 	}
 	
-	public boolean loginInorrectCredentials(WebDriver driver, ExtentReporter reporter) {
+	public void loginInorrectCredentials(WebDriver driver, ExtentReporter reporter) {
 		element.getWebElement(driver, "ID", "email").sendKeys(username);
 		element.getWebElement(driver, "ID", "password").sendKeys(password);
 		reporter.logExtentReport(driver, "screenShot", "loginInorrectCredentialsTest", "");
@@ -65,7 +63,6 @@ public class LoginEvent {
 			reporter.logExtentReport(driver, "screenShotFail", "loginInorrectCredentialsTestFail", "");
 		}
 		Assert.assertEquals("Should still be in Login Page after error", true, validateFailedLogin);
-		return validateFailedLogin;
 	}
 	
 	public String getUsername() {

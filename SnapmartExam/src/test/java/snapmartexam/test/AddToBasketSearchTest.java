@@ -69,14 +69,12 @@ public class AddToBasketSearchTest {
 		lp.accessLandingPage(baseTest.driver, reporter);
 		le = new LoginEvent();
 		le.setExpUrlLogin(expUrlLogin);
-		//validate login page
-		Assert.assertEquals(true, le.accessLogin(baseTest.driver, reporter));
+		le.accessLogin(baseTest.driver, reporter);
 		
 		le.setUsername(username);
 		le.setPassword(password);
 		le.setExpUrlSearch(expUrlSearch);
-		//validate if redirected to search page
-		Assert.assertEquals(true, le.loginCorrectCredentials(baseTest.driver, reporter));
+		le.loginCorrectCredentials(baseTest.driver, reporter);
 	}
 	
 	@Test
@@ -94,11 +92,11 @@ public class AddToBasketSearchTest {
 		}
 		System.out.println(orderList);
 		atbe.setOrders(orderList);
-		Assert.assertEquals("addItemsToBasketThroughSearch", true, atbe.addItemsToBasketThroughSearch(baseTest.driver, reporter));
+		atbe.addItemsToBasketThroughSearch(baseTest.driver, reporter);
 		
 		//Validate Added Orders on Basket Page
 		atbe.setExpUrlBasket(expUrlBasket);
-		Assert.assertEquals("checkAddedItems", true, atbe.checkAddedItems(baseTest.driver, reporter));
+		atbe.checkAddedItems(baseTest.driver, reporter);
 	}
 	
 	@After

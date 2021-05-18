@@ -16,28 +16,32 @@ import org.junit.runners.Parameterized;
 import snapmartexam.pageevents.AddToBasketEvent;
 import snapmartexam.pageevents.LandingPageEvent;
 import snapmartexam.pageevents.LoginEvent;
+import snapmartexam.pageevents.PayCreditCardEvent;
 import snapmartexam.utils.ExtentReporter;
 import snapmartexam.utils.HandleTestData;
 
 @RunWith(Parameterized.class)
-public class AddToBasketPaginationTest {
+public class PayCreditCardTest {
 	private static CuongnguyenTest baseTest;
 	private static HandleTestData htd;
 	private static ExtentReporter reporter;
 	private static LandingPageEvent lp;
 	private static LoginEvent le;
-	private static AddToBasketEvent atbe;
+	private static PayCreditCardEvent pcc;
 
 	private static String filePath = "C:\\Users\\mrongavilla\\Documents\\CuongnguyenTestData\\";
-	private static String fileName = "AddToBasketTest.xlsx";
-	private static String sheetName = "AddToBasketSheet";
-	private static final String reportName = "AddToBasketPaginationTest";
-	private static final String testName = "AddToBasketPaginationTest";
-	private static final String testDesc = "Tetsing add to basket through pagination.";
-	private String username, password, expUrlLogin, expUrlSearch, expUrlBasket, itemName, quantity;
+	private static String fileName = "PayCreditCardTest.xlsx";
+	private static String sheetName = "PayCreditSheet";
+	private static final String reportName = "PayCreditCardTest";
+	private static final String testName = "PayCreditCardTest";
+	private static final String testDesc = "Tetsing payment using credit card.";
+	private String username, password, expUrlLogin, expUrlSearch, address, expUrlPurchaseBasket, expUrlSelectAddress, expUrlDeliveryAddress, 
+		deliverySpeed, expUrlPaymentOption, creditCardName, expUrlOrderSummary, expUrlOrderCompletion;
 	
-	public AddToBasketPaginationTest(String webBrowser, String webUrl, String username, String password, String expUrlLogin, String expUrlSearch,
-			String expUrlBasket, String itemName, String quantity) {
+	public PayCreditCardTest(String webBrowser, String webUrl, String username, String password, String expUrlLogin, String expUrlSearch,
+			String expUrlPurchaseBasket, String expUrlSelectAddress, String address, String expUrlDeliveryAddress, 
+			String deliverySpeed, String expUrlPaymentOption, String creditCardName, String expUrlOrderSummary,
+			String expUrlOrderCompletion) {
 
 		baseTest = new CuongnguyenTest(webBrowser, webUrl);
 		reporter = new ExtentReporter();
@@ -46,10 +50,15 @@ public class AddToBasketPaginationTest {
 		this.password = password;
 		this.expUrlLogin = expUrlLogin;
 		this.expUrlSearch = expUrlSearch;
-		this.expUrlBasket = expUrlBasket;
-		this.itemName = itemName;
-		this.quantity = quantity;
-		
+		this.address = address;
+		this.expUrlPurchaseBasket = expUrlPurchaseBasket;
+		this.expUrlSelectAddress = expUrlSelectAddress;
+		this.expUrlDeliveryAddress = expUrlDeliveryAddress;
+		this.deliverySpeed = deliverySpeed;
+		this.expUrlPaymentOption = expUrlPaymentOption;
+		this.creditCardName = creditCardName;
+		this.expUrlOrderSummary = expUrlOrderSummary;
+		this.expUrlOrderCompletion = expUrlOrderCompletion;
 	}
 	
 	@Parameterized.Parameters
@@ -74,30 +83,23 @@ public class AddToBasketPaginationTest {
 		le.setUsername(username);
 		le.setPassword(password);
 		le.setExpUrlSearch(expUrlSearch);
-		//validate if redirected to search page
 		le.loginCorrectCredentials(baseTest.driver, reporter);
 	}
 	
 	@Test
 	public void addItemToBasketThroughPaginationTest() {
-		//Adding Orders to Basket and Validating Order count
-		atbe = new AddToBasketEvent();
-		
-		LinkedHashMap<String, Integer> orderList = new LinkedHashMap<>();
-		
-		String[] itemList = itemName.split("~");
-		String[] quantityList = quantity.split("~");
-		
-		for(int i=0; i<itemList.length; i++) {
-			orderList.put(itemList[i], Integer.parseInt(quantityList[i]));
-		}
-		System.out.println(orderList);
-		atbe.setOrders(orderList);
-		atbe.addItemsToBasketThroughPagination(baseTest.driver, reporter);
-
-		//Validate Added Orders on Basket Page
-		atbe.setExpUrlBasket(expUrlBasket);
-		atbe.checkAddedItems(baseTest.driver, reporter);
+		//Paying orders using credit card
+		pcc = new PayCreditCardEvent();
+		pcc.setAddress(address);
+		pcc.setExpUrlPurchaseBasket(expUrlPurchaseBasket);
+		pcc.setExpUrlSelectAddress(expUrlSelectAddress);
+		pcc.setExpUrlDeliveryAddress(expUrlDeliveryAddress);
+		pcc.setDeliverySpeed(deliverySpeed);
+		pcc.setExpUrlPaymentOption(expUrlPaymentOption);
+		pcc.setCreditCardName(creditCardName);
+		pcc.setExpUrlOrderSummary(expUrlOrderSummary);
+		pcc.setExpUrlOrderCompletion(expUrlOrderCompletion);
+		pcc.payOrdersUsingCreditCard(baseTest.driver, reporter);
 	}
 	
 	@After

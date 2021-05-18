@@ -99,6 +99,33 @@ public class HandleTestData {
     	        case "quantity":
     	        	dataList.add(row.getCell(data.getValue()).getStringCellValue());
     	        	break;
+    	        case "address":
+    	        	dataList.add(row.getCell(data.getValue()).getStringCellValue());
+    	        	break;
+    	        case "expUrlPurchaseBasket":
+    	        	dataList.add(row.getCell(data.getValue()).getStringCellValue());
+    	        	break;
+    	        case "expUrlSelectAddress":
+    	        	dataList.add(row.getCell(data.getValue()).getStringCellValue());
+    	        	break;
+    	        case "expUrlDeliveryAddress":
+    	        	dataList.add(row.getCell(data.getValue()).getStringCellValue());
+    	        	break;
+    	        case "deliverySpeed":
+    	        	dataList.add(row.getCell(data.getValue()).getStringCellValue());
+    	        	break;
+    	        case "expUrlPaymentOption":
+    	        	dataList.add(row.getCell(data.getValue()).getStringCellValue());
+    	        	break;
+    	        case "creditCardName":
+    	        	dataList.add(row.getCell(data.getValue()).getStringCellValue());
+    	        	break;
+    	        case "expUrlOrderSummary":
+    	        	dataList.add(row.getCell(data.getValue()).getStringCellValue());
+    	        	break;
+    	        case "expUrlOrderCompletion":
+    	        	dataList.add(row.getCell(data.getValue()).getStringCellValue());
+    	        	break;
     	        }
         	}
         	collection.add(dataList);

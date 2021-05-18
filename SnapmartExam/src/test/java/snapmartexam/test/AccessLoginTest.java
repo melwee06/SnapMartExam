@@ -57,8 +57,7 @@ public class AccessLoginTest {
 	public void accessLoginTest() {
 		le = new LoginEvent();
 		le.setExpUrlLogin(expUrlLogin);
-		//validate login page
-		Assert.assertEquals("accessLogin", true, le.accessLogin(baseTest.driver, reporter));
+		le.accessLogin(baseTest.driver, reporter);
 	}
 	
 	@After

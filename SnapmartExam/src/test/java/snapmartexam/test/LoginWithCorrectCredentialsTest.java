@@ -66,8 +66,7 @@ public class LoginWithCorrectCredentialsTest {
 		le.setUsername(username);
 		le.setPassword(password);
 		le.setExpUrlSearch(expUrlSearch);
-		//validate if redirected to search page
-		Assert.assertEquals("loginCorrectCredentials", true, le.loginCorrectCredentials(baseTest.driver, reporter));
+		le.loginCorrectCredentials(baseTest.driver, reporter);
 	}
 	
 	@After

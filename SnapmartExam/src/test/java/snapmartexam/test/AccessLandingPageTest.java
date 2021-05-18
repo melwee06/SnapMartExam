@@ -44,8 +44,7 @@ public class AccessLandingPageTest {
 	@Test
 	public void accessLandingPageTest() {
 		lp = new LandingPageEvent();
-		//check landing page if loaded properly
-		Assert.assertEquals("accessLandingPage", true, lp.accessLandingPage(baseTest.driver, reporter));
+		lp.accessLandingPage(baseTest.driver, reporter);
 	}
 	
 	@After

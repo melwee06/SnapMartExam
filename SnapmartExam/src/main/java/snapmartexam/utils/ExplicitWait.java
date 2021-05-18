@@ -31,9 +31,9 @@ public class ExplicitWait {
 		}
 	}
 	
-	public boolean waitElementUrlToBe(WebDriver driver, String url, int waitTime) {
+	public boolean waitElementUrl(WebDriver driver, String url, int waitTime) {
 		wait = new WebDriverWait(driver, waitTime);
-		return wait.until(ExpectedConditions.urlToBe(url));
+		return wait.until(ExpectedConditions.urlContains(url));
 	}
 	
 }

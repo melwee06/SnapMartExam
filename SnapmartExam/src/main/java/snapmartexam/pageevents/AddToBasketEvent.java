@@ -23,7 +23,7 @@ public class AddToBasketEvent {
 	private static String expUrlBasket;
 	private static int successAdded=0, count;
 		
-	public boolean addItemsToBasketThroughPagination(WebDriver driver, ExtentReporter reporter) {
+	public void addItemsToBasketThroughPagination(WebDriver driver, ExtentReporter reporter) {
 		boolean addItemCheckP = false;
 		//get initial value of order count
 		count = Integer.parseInt(element.getWebElement(driver, "XPATH", "//span[contains(@class,'warn-notification')]").getText());
@@ -72,7 +72,6 @@ public class AddToBasketEvent {
 			reporter.logExtentReport(driver, "fail", "", "Item count was not updated properly.");
 			reporter.logExtentReport(driver, "screenShotFail", "addNumberofItemsTestFail", "");
 		}
-		return addItemCheckP;
 	}
 	
 	public boolean addItemsToBasketThroughSearch(WebDriver driver, ExtentReporter reporter) {
@@ -168,7 +167,7 @@ public class AddToBasketEvent {
 				boolean countUpdated = numberOfOrders>=orders.getValue();
 				//check if added item count was updated
 				basketCheck = countUpdated;
-				Assert.assertEquals("Count was updated on basket page", true, countUpdated);
+				Assert.assertEquals("Count was not updated on basket page", true, countUpdated);
 			}else {
 				basketCheck = false;
 				reporter.logExtentReport(driver, "fail", "", "Items were not added to the basket or count was wrong.");

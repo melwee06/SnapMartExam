@@ -65,8 +65,7 @@ public class LoginWithIncorrectCredentialsTest {
 		le.setUsername(incorrectUsername); //wrong email
 		le.setPassword(incorrectPassword); //wrong password
 		le.setExpUrlLogin(expUrlLogin);
-		//validate if still on login page
-		Assert.assertEquals("loginInorrectCredentials", true, le.loginInorrectCredentials(baseTest.driver, reporter));
+		le.loginInorrectCredentials(baseTest.driver, reporter);
 	}
 	
 	@After
