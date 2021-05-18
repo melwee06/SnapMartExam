@@ -44,7 +44,11 @@
 	          <includes>
 	            <include>AccessLandingPageTest.java</include>
 	            <include>AccessLoginTest.java</include>
+	            <include>LoginWithIncorrectCredentialsTest.java</include>
 	            <include>LoginWithCorrectCredentialsTest.java</include>
+	            <include>AddToBasketPaginationTest.java</include>
+	            <include>AddToBasketSearchTest.java</include>
+	            <include>PayCreditCardTest.java</include>
 	          </includes>
 	        </configuration>
 	    </plugin>

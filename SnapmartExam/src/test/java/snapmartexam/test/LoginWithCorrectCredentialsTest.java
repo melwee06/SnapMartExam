@@ -29,7 +29,7 @@ public class LoginWithCorrectCredentialsTest {
 	private static final String reportName = "LoginWithCorrectCredentialsTest";
 	private static final String testName = "LoginWithCorrectCredentialsTest";
 	private static final String testDesc = "Testing login with correct credentials.";
-	private String username, password, expUrlLogin, expUrlSearch, incorrectUsername, incorrectPassword;
+	private String username, password, expUrlLogin, expUrlSearch;
 	
 	public LoginWithCorrectCredentialsTest(String webBrowser, String webUrl, String username, String password, String expUrlLogin, String expUrlSearch) {
 		baseTest = new CuongnguyenTest(webBrowser, webUrl);
