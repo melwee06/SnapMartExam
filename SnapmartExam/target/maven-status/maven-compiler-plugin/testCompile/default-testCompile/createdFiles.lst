@@ -1,6 +1,8 @@
 snapmartexam\test\AccessLoginTest.class
-snapmartexam\test\AccessLandingPageTest.class
+snapmartexam\test\AddToBasketPaginationTest.class
 snapmartexam\test\LoginWithIncorrectCredentialsTest.class
-snapmartexam\test\AddToBasketTest.class
 snapmartexam\test\CuongnguyenTest.class
 snapmartexam\test\LoginWithCorrectCredentialsTest.class
+snapmartexam\test\AccessLandingPageTest.class
+snapmartexam\test\AddToBasketSearchTest.class
+snapmartexam\test\PayCreditCardTest.class

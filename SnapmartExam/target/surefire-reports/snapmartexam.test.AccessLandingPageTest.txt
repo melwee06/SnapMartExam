@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: snapmartexam.test.AccessLandingPageTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.323 s - in snapmartexam.test.AccessLandingPageTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.628 s - in snapmartexam.test.AccessLandingPageTest

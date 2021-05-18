@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: snapmartexam.test.AccessLoginTest
+Test set: snapmartexam.test.PayCreditCardTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.961 s - in snapmartexam.test.AccessLoginTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.24 s - in snapmartexam.test.PayCreditCardTest
